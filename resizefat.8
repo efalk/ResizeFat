@@ -1,0 +1,86 @@
+.\" $Id: resizefat.8 3 2011-09-14 03:17:55Z efalk $
+.TH RESIZEFAT 8 "July 2011" "Version 1.0"
+.SH NAME
+.B resizefat
+\- simple utility to change a FAT file system size.
+.SH SYNOPSIS
+.LP
+.B resizefat
+.B \-h
+.br
+.B resizefat
+[
+.B \-v
+]
+.I device
+.I size
+.br
+.B resizefat
+.B \-r
+[
+.B \-v
+]
+.I device
+.SH DESCRIPTION
+.LP
+The \fBresizefat\fP program is a simple program to resize a FAT file
+system in place.  If the file system is to be increased in size, you
+must first ensure that the partition that contains it is large
+enough for the new size.  If you need to resize the partition as
+well as the file system, consider using \fBparted\fP instead.
+.PP
+Resizefat is intended for use in cases where there is no partition
+table or where the file system is contained in an LVM partition.
+.PP
+Resizefat executes \fBdosfsck\fP before making any changes.  In
+addition, resizefat also fixes some file system errors that dosfsck
+might miss.
+.PP
+.I device
+is the special file corresponding to the device (e.g /dev/hdXX).
+.PP
+.I size
+is the new size for the FAT file system.  This value accepts the
+following suffixes:
+.BR B ,
+.BR S ,
+.BR K ,
+.BR M ,
+.BR G ,
+corresponding to bytes, sectors, kilobytes, megabytes, and gigabytes.
+Default is megabytes.
+Ignored with the \fB-r\fP option.  Required otherwise.
+If the new size is greater than the available space in the
+partition, it will be reduced to the partition size.
+.SH OPTIONS
+.TP 10
+.B \-h
+Print short help and exit.
+.TP
+.B \-v
+Verbose output.
+.TP
+.B \-r
+Repair only.  Resizefat repairs the file system and exits without changing
+its size.
+.SH EXIT STATUS
+.PP
+Resizefat exits with status 0 if the filesystem is resized successfully.
+Otherwise, it exits with one of the following values:
+1 = command line error;
+2 = unable to open device;
+3 = unable to determine device size;
+4 = I/O error;
+5 = not a FAT filesystem or not repairable;
+6 = requested size too small;
+.SH SEE ALSO
+.BR parted (8),
+.BR mkdosfs (8),
+.BR dosfsck (8).
+.SH AUTHOR
+Edward Falk \- <efalk@users.sourceforge.net>
+.SH MAINTAINER
+Edward Falk \- <efalk@users.sourceforge.net>
+.SH DISCLAIMER
+USE AT YOUR OWN RISK! I assume no responsibility for any errors
+in this program, the database or documentation.

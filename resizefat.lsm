@@ -1,0 +1,16 @@
+Begin4
+Title:		Resizefat -- resize a FAT file system
+Version:	1.0
+Entered-date:	2011-07-28
+Description:	A simple utility to resize FAT filesystems, based on the parted
+		library.  This tool allows you to resize FAT filesystems in
+		cases where you can't access the partition table, where there
+		are no partitions, or where the partition is part of LVM.
+Keywords:	FAT system utility
+Author:		efalk@users.sourceforge.org (Ed Falk)
+Maintained-by:	efalk@users.sourceforge.org (Ed Falk)
+Primary-site:	resizefat.sourceforge.net
+		6552 resizefat-0.1.tar.gz
+Platforms:	linux
+Copying-policy: GPLv2+
+End
